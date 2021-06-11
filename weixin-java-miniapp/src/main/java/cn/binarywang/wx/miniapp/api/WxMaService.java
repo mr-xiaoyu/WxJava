@@ -408,4 +408,10 @@ public interface WxMaService extends WxService {
    * @return
    */
   WxMaLinkService getLinkService();
+
+  /**
+   * 获取电子发票报销方服务接口
+   * @return
+   */
+  WxMaReimburseInvoiceService getReimburseInvoiceService();
 }
