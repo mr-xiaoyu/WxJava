@@ -222,6 +222,10 @@ public class WxMaApiUrlConstants {
     String GENERATE_SCHEME_URL = "https://api.weixin.qq.com/wxa/generatescheme";
   }
 
+  public interface Link {
+    String GENERATE_URLLINK_URL = "https://api.weixin.qq.com/wxa/generate_urllink";
+  }
+
   public interface SecCheck {
     String IMG_SEC_CHECK_URL = "https://api.weixin.qq.com/wxa/img_sec_check";
     String MSG_SEC_CHECK_URL = "https://api.weixin.qq.com/wxa/msg_sec_check";
