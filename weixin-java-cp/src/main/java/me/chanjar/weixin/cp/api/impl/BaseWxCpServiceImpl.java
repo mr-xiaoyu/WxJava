@@ -17,15 +17,14 @@ import me.chanjar.weixin.common.session.WxSessionManager;
 import me.chanjar.weixin.common.util.DataUtils;
 import me.chanjar.weixin.common.util.RandomUtils;
 import me.chanjar.weixin.common.util.crypto.SHA1;
-import me.chanjar.weixin.common.util.http.RequestExecutor;
-import me.chanjar.weixin.common.util.http.RequestHttp;
-import me.chanjar.weixin.common.util.http.SimpleGetRequestExecutor;
-import me.chanjar.weixin.common.util.http.SimplePostRequestExecutor;
+import me.chanjar.weixin.common.util.http.*;
 import me.chanjar.weixin.common.util.json.GsonParser;
 import me.chanjar.weixin.cp.api.*;
+import me.chanjar.weixin.cp.bean.WxCpAgentJsapiSignature;
 import me.chanjar.weixin.cp.bean.WxCpMaJsCode2SessionResult;
 import me.chanjar.weixin.cp.bean.WxCpProviderToken;
 import me.chanjar.weixin.cp.config.WxCpConfigStorage;
+import org.apache.commons.lang3.StringUtils;
 
 import java.io.File;
 import java.io.IOException;
@@ -50,6 +49,8 @@ public abstract class BaseWxCpServiceImpl<H, P> implements WxCpService, RequestH
   private WxCpTagService tagService = new WxCpTagServiceImpl(this);
   private WxCpAgentService agentService = new WxCpAgentServiceImpl(this);
   private WxCpOaService oaService = new WxCpOaServiceImpl(this);
+  private WxCpLivingService livingService = new WxCpLivingServiceImpl(this);
+  private WxCpMsgAuditService msgAuditService = new WxCpMsgAuditServiceImpl(this);
   private WxCpTaskCardService taskCardService = new WxCpTaskCardServiceImpl(this);
   private WxCpExternalContactService externalContactService = new WxCpExternalContactServiceImpl(this);
   private WxCpGroupRobotService groupRobotService = new WxCpGroupRobotServiceImpl(this);
@@ -57,6 +58,7 @@ public abstract class BaseWxCpServiceImpl<H, P> implements WxCpService, RequestH
   private WxCpOaCalendarService oaCalendarService = new WxCpOaCalendarServiceImpl(this);
   private WxCpOaScheduleService oaScheduleService = new WxCpOaOaScheduleServiceImpl(this);
   private WxCpAgentWorkBenchService workBenchService = new WxCpAgentWorkBenchServiceImpl(this);
+  private WxCpKfService kfService = new WxCpKfServiceImpl(this);
 
   /**
    * 全局的是否正在刷新access token的锁.
@@ -169,6 +171,30 @@ public abstract class BaseWxCpServiceImpl<H, P> implements WxCpService, RequestH
 
     // Fixed bug
     jsapiSignature.setAppId(this.configStorage.getCorpId());
+
+    return jsapiSignature;
+  }
+
+  @Override
+  public WxCpAgentJsapiSignature createAgentJsapiSignature(String url) throws WxErrorException {
+    long timestamp = System.currentTimeMillis() / 1000;
+    String noncestr = RandomUtils.getRandomStr();
+    String jsapiTicket = getAgentJsapiTicket(false);
+    String signature = SHA1.genWithAmple(
+      "jsapi_ticket=" + jsapiTicket,
+      "noncestr=" + noncestr,
+      "timestamp=" + timestamp,
+      "url=" + url
+    );
+
+    WxCpAgentJsapiSignature jsapiSignature = new WxCpAgentJsapiSignature();
+    jsapiSignature.setTimestamp(timestamp);
+    jsapiSignature.setNonceStr(noncestr);
+    jsapiSignature.setUrl(url);
+    jsapiSignature.setSignature(signature);
+
+    jsapiSignature.setCorpid(this.configStorage.getCorpId());
+    jsapiSignature.setAgentid(this.configStorage.getAgentId());
 
     return jsapiSignature;
   }
@@ -394,6 +420,13 @@ public abstract class BaseWxCpServiceImpl<H, P> implements WxCpService, RequestH
     return get(url, null);
   }
 
+  @Override
+  public String buildQrConnectUrl(String redirectUri, String state) {
+    return String.format("https://open.work.weixin.qq.com/wwopen/sso/qrConnect?appid=%s&agentid=%s&redirect_uri=%s&state=%s",
+      this.configStorage.getCorpId(), this.configStorage.getAgentId(),
+      URIUtil.encodeURIComponent(redirectUri), StringUtils.trimToEmpty(state));
+  }
+
   public File getTmpDirFile() {
     return this.tmpDirFile;
   }
@@ -445,6 +478,16 @@ public abstract class BaseWxCpServiceImpl<H, P> implements WxCpService, RequestH
   @Override
   public WxCpOaService getOaService() {
     return oaService;
+  }
+
+  @Override
+  public WxCpLivingService getLivingService() {
+    return livingService;
+  }
+
+  @Override
+  public WxCpMsgAuditService getMsgAuditService() {
+    return msgAuditService;
   }
 
   @Override
@@ -519,5 +562,15 @@ public abstract class BaseWxCpServiceImpl<H, P> implements WxCpService, RequestH
   @Override
   public WxCpOaScheduleService getOaScheduleService() {
     return this.oaScheduleService;
+  }
+
+  @Override
+  public WxCpKfService getKfService() {
+    return kfService;
+  }
+
+  @Override
+  public void setKfService(WxCpKfService kfService) {
+    this.kfService = kfService;
   }
 }

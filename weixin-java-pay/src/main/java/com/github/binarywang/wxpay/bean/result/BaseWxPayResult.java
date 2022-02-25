@@ -150,6 +150,7 @@ public abstract class BaseWxPayResult {
     }
     XStream xstream = XStreamInitializer.getInstance();
     xstream.processAnnotations(clz);
+    xstream.setClassLoader(BaseWxPayResult.class.getClassLoader());
     T result = (T) xstream.fromXML(xmlString);
     result.setXmlString(xmlString);
     return result;
@@ -227,6 +228,15 @@ public abstract class BaseWxPayResult {
     }
 
     return Integer.parseInt(content);
+  }
+
+  protected static Long readXmlLong(Document d, String tagName) {
+    String content = readXmlString(d, tagName);
+    if (content == null || content.trim().length() == 0) {
+      return null;
+    }
+
+    return Long.parseLong(content);
   }
 
   /**

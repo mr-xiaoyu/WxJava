@@ -45,6 +45,7 @@ public class WxConsts {
     public static final String HARDWARE = "hardware";
     public static final String TRANSFER_CUSTOMER_SERVICE = "transfer_customer_service";
     public static final String UPDATE_TASKCARD = "update_taskcard";
+    public static final String UPDATE_BUTTON = "update_button";
   }
 
   /**
@@ -120,6 +121,42 @@ public class WxConsts {
      * 小程序通知消息.
      */
     public static final String MINIPROGRAM_NOTICE = "miniprogram_notice";
+
+    /**
+     * 模板卡片消息.
+     */
+    public static final String TEMPLATE_CARD = "template_card";
+
+    /**
+     * 发送图文消息（点击跳转到图文消息页面）使用通过 “发布” 系列接口得到的 article_id(草稿箱功能上线后不再支持客服接口中带 media_id 的 mpnews 类型的图文消息)
+     */
+    public static final String MP_NEWS_ARTICLE = "mpnewsarticle";
+  }
+
+  /**
+   * 企业微信模板卡片消息的卡片类型
+   */
+  public static class TemplateCardType {
+    /**
+     * 文本通知型卡片
+     */
+    public static final String TEXT_NOTICE = "text_notice";
+    /**
+     * 图文展示型卡片
+     */
+    public static final String NEWS_NOTICE = "news_notice";
+    /**
+     * 按钮交互型卡片
+     */
+    public static final String BUTTON_INTERACTION = "button_interaction";
+    /**
+     * 投票选择型卡片
+     */
+    public static final String VOTE_INTERACTION = "vote_interaction";
+    /**
+     * 多项选择型卡片
+     */
+    public static final String MULTIPLE_INTERACTION = "multiple_interaction";
   }
 
   /**
@@ -156,6 +193,12 @@ public class WxConsts {
     public static final String ERR_20013 = "err(20013)";
     public static final String ERR_22000 = "err(22000)";
     public static final String ERR_21000 = "err(21000)";
+    public static final String ERR_30001 = "err(30001)";
+    public static final String ERR_30002 = "err(30002)";
+    public static final String ERR_30003 = "err(30003)";
+    public static final String ERR_40001 = "err(40001)";
+    public static final String ERR_40002 = "err(40002)";
+
 
     /**
      * 群发反馈消息代码所对应的文字描述.
@@ -174,6 +217,11 @@ public class WxConsts {
       STATUS_DESC.put(ERR_20013, "涉嫌版权");
       STATUS_DESC.put(ERR_22000, "涉嫌互推_互相宣传");
       STATUS_DESC.put(ERR_21000, "涉嫌其他");
+      STATUS_DESC.put(ERR_30001, "原创校验出现系统错误且用户选择了被判为转载就不群发");
+      STATUS_DESC.put(ERR_30002, "原创校验被判定为不能群发");
+      STATUS_DESC.put(ERR_30003, "原创校验被判定为转载文且用户选择了被判为转载就不群发");
+      STATUS_DESC.put(ERR_40001, "管理员拒绝");
+      STATUS_DESC.put(ERR_40002, "管理员30分钟内无响应，超时");
     }
   }
 
@@ -296,6 +344,11 @@ public class WxConsts {
      * 小程序审核事件：审核不通过
      */
     public static final String WEAPP_AUDIT_FAIL = "weapp_audit_fail";
+
+    /**
+     * 点击菜单跳转小程序的事件推送
+     */
+    public static final String VIEW_MINIPROGRAM = "view_miniprogram";
 
   }
 

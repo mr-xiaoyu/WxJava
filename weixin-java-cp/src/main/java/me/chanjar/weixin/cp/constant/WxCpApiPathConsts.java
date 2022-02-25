@@ -1,8 +1,6 @@
 package me.chanjar.weixin.cp.constant;
 
 
-import lombok.experimental.UtilityClass;
-
 /**
  * <pre>
  *  企业微信api地址常量类
@@ -91,8 +89,13 @@ public interface WxCpApiPathConsts {
   }
 
   interface Oa {
+    String GET_CORP_CHECKIN_OPTION = "/cgi-bin/checkin/getcorpcheckinoption";
     String GET_CHECKIN_DATA = "/cgi-bin/checkin/getcheckindata";
     String GET_CHECKIN_OPTION = "/cgi-bin/checkin/getcheckinoption";
+    String GET_CHECKIN_DAY_DATA = "/cgi-bin/checkin/getcheckin_daydata";
+    String GET_CHECKIN_MONTH_DATA = "/cgi-bin/checkin/getcheckin_monthdata";
+    String GET_CHECKIN_SCHEDULE_DATA = "/cgi-bin/checkin/getcheckinschedulist";
+    String SET_CHECKIN_SCHEDULE_DATA = "/cgi-bin/checkin/setcheckinschedulist";
     String GET_APPROVAL_INFO = "/cgi-bin/oa/getapprovalinfo";
     String GET_APPROVAL_DETAIL = "/cgi-bin/oa/getapprovaldetail";
     String GET_DIAL_RECORD = "/cgi-bin/dial/get_dial_record";
@@ -111,6 +114,25 @@ public interface WxCpApiPathConsts {
     String SCHEDULE_LIST = "/cgi-bin/oa/schedule/get_by_calendar";
 
     String COPY_TEMPLATE = "/cgi-bin/oa/approval/copytemplate";
+  }
+
+  interface Living {
+    String GET_LIVING_CODE = "/cgi-bin/living/get_living_code";
+    String GET_LIVING_INFO = "/cgi-bin/living/get_living_info?livingid=";
+    String GET_WATCH_STAT = "/cgi-bin/living/get_watch_stat";
+    String GET_LIVING_SHARE_INFO = "/cgi-bin/living/get_living_share_info";
+    String GET_USER_ALL_LIVINGID = "/cgi-bin/living/get_user_all_livingid";
+
+    String CREATE = "/cgi-bin/living/create";
+    String MODIFY = "/cgi-bin/living/modify";
+    String CANCEL = "/cgi-bin/living/cancel";
+    String DELETE_REPLAY_DATA = "/cgi-bin/living/delete_replay_data";
+  }
+
+  interface MsgAudit {
+    String GET_PERMIT_USER_LIST = "/cgi-bin/msgaudit/get_permit_user_list";
+    String GET_GROUP_CHAT = "/cgi-bin/msgaudit/groupchat/get";
+    String CHECK_SINGLE_AGREE = "/cgi-bin/msgaudit/check_single_agree";
   }
 
   interface Tag {
@@ -175,13 +197,26 @@ public interface WxCpApiPathConsts {
     String CLOSE_TEMP_CHAT = "/cgi-bin/externalcontact/close_temp_chat";
     String GET_FOLLOW_USER_LIST = "/cgi-bin/externalcontact/get_follow_user_list";
     String GET_CONTACT_DETAIL = "/cgi-bin/externalcontact/get?external_userid=";
+    String CONVERT_TO_OPENID = "/cgi-bin/externalcontact/convert_to_openid";
+    String UNIONID_TO_EXTERNAL_USERID = "/cgi-bin/externalcontact/unionid_to_external_userid";
+    String UNIONID_TO_EXTERNAL_USERID_3RD = "/cgi-bin/service/externalcontact/unionid_to_external_userid_3rd";
+    String GET_NEW_EXTERNAL_USERID = "/cgi-bin/service/externalcontact/get_new_external_userid";
+    String TO_SERVICE_EXTERNAL_USERID = "/cgi-bin/externalcontact/to_service_external_userid";
+    String FINISH_EXTERNAL_USERID_MIGRATION = "/cgi-bin/externalcontact/finish_external_userid_migration";
     String GET_CONTACT_DETAIL_BATCH = "/cgi-bin/externalcontact/batch/get_by_user?";
     String UPDATE_REMARK = "/cgi-bin/externalcontact/remark";
     String LIST_EXTERNAL_CONTACT = "/cgi-bin/externalcontact/list?userid=";
     String LIST_UNASSIGNED_CONTACT = "/cgi-bin/externalcontact/get_unassigned_list";
+    @Deprecated
     String TRANSFER_UNASSIGNED_CONTACT = "/cgi-bin/externalcontact/transfer";
+    String TRANSFER_CUSTOMER = "/cgi-bin/externalcontact/transfer_customer";
+    String TRANSFER_RESULT = "/cgi-bin/externalcontact/transfer_result";
+    String RESIGNED_TRANSFER_CUSTOMER = "/cgi-bin/externalcontact/resigned/transfer_customer";
+    String RESIGNED_TRANSFER_RESULT = "/cgi-bin/externalcontact/resigned/transfer_result";
     String GROUP_CHAT_LIST = "/cgi-bin/externalcontact/groupchat/list";
     String GROUP_CHAT_INFO = "/cgi-bin/externalcontact/groupchat/get";
+    String OPENID_TO_CHATID= "/cgi-bin/externalcontact/opengid_to_chatid";
+    String GROUP_CHAT_TRANSFER = "/cgi-bin/externalcontact/groupchat/transfer";
     String LIST_USER_BEHAVIOR_DATA = "/cgi-bin/externalcontact/get_user_behavior_data";
     String LIST_GROUP_CHAT_DATA = "/cgi-bin/externalcontact/groupchat/statistic";
     String ADD_MSG_TEMPLATE = "/cgi-bin/externalcontact/add_msg_template";
@@ -192,5 +227,51 @@ public interface WxCpApiPathConsts {
     String EDIT_CORP_TAG = "/cgi-bin/externalcontact/edit_corp_tag";
     String DEL_CORP_TAG = "/cgi-bin/externalcontact/del_corp_tag";
     String MARK_TAG = "/cgi-bin/externalcontact/mark_tag";
+
+    String ADD_MOMENT_TASK = "/cgi-bin/externalcontact/add_moment_task";
+    String GET_MOMENT_TASK_RESULT = "/cgi-bin/externalcontact/get_moment_task_result";
+    String GET_MOMENT_LIST = "/cgi-bin/externalcontact/get_moment_list";
+    String GET_MOMENT_TASK = "/cgi-bin/externalcontact/get_moment_task";
+    String GET_MOMENT_CUSTOMER_LIST = "/cgi-bin/externalcontact/get_moment_customer_list";
+    String GET_MOMENT_SEND_RESULT = "/cgi-bin/externalcontact/get_moment_send_result";
+    String GET_MOMENT_COMMENTS = "/cgi-bin/externalcontact/get_moment_comments";
+
+    String GET_GROUP_MSG_SEND_RESULT = "/cgi-bin/externalcontact/get_groupmsg_send_result";
+    String GET_GROUP_MSG_TASK = "/cgi-bin/externalcontact/get_groupmsg_task";
+    String GET_GROUP_MSG_LIST_V2 = "/cgi-bin/externalcontact/get_groupmsg_list_v2";
+    String GET_GROUP_MSG_RESULT = "/cgi-bin/externalcontact/get_group_msg_result";
+
+    String GET_PRODUCT_ALBUM = "/cgi-bin/externalcontact/get_product_album";
+    String GET_PRODUCT_ALBUM_LIST = "/cgi-bin/externalcontact/get_product_album_list";
+
+    String GROUP_WELCOME_TEMPLATE_ADD = "/cgi-bin/externalcontact/group_welcome_template/add";
+    String GROUP_WELCOME_TEMPLATE_EDIT = "/cgi-bin/externalcontact/group_welcome_template/edit";
+    String GROUP_WELCOME_TEMPLATE_GET = "/cgi-bin/externalcontact/group_welcome_template/get";
+    String GROUP_WELCOME_TEMPLATE_DEL = "/cgi-bin/externalcontact/group_welcome_template/del";
+
+    String UPLOAD_ATTACHMENT = "/cgi-bin/media/upload_attachment";
+
+  }
+
+  interface Kf {
+    String ACCOUNT_ADD = "/cgi-bin/kf/account/add";
+    String ACCOUNT_UPD = "/cgi-bin/kf/account/update";
+    String ACCOUNT_DEL = "/cgi-bin/kf/account/del";
+    String ACCOUNT_LIST = "/cgi-bin/kf/account/list";
+    String ADD_CONTACT_WAY = "/cgi-bin/kf/add_contact_way";
+
+    String SERVICER_ADD = "/cgi-bin/kf/servicer/add";
+    String SERVICER_DEL = "/cgi-bin/kf/servicer/del";
+    String SERVICER_LIST = "/cgi-bin/kf/servicer/list?open_kfid=";
+
+    String SERVICE_STATE_GET = "/cgi-bin/kf/service_state/get";
+    String SERVICE_STATE_TRANS = "/cgi-bin/kf/service_state/trans";
+
+    String SYNC_MSG = "/cgi-bin/kf/sync_msg";
+    String SEND_MSG = "/cgi-bin/kf/send_msg";
+
+    String SEND_MSG_ON_EVENT = "/cgi-bin/kf/send_msg_on_event";
+    String CUSTOMER_BATCH_GET = "/cgi-bin/kf/customer/batchget";
+
   }
 }

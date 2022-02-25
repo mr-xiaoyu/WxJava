@@ -172,7 +172,7 @@ public class WxCpContactWayInfo implements Serializable {
     @JsonAdapter(WxCpConclusionAdapter.class)
     public static class Conclusion implements Serializable {
       private static final long serialVersionUID = -8697184659526210472L;
-      
+
       private String textContent;
       private String imgMediaId;
       private String imgPicUrl;
@@ -208,7 +208,7 @@ public class WxCpContactWayInfo implements Serializable {
      * 多人
      */
     @SerializedName("2")
-    MULTI;
+    MULTI
 
   }
 
@@ -224,7 +224,7 @@ public class WxCpContactWayInfo implements Serializable {
      * 通过二维码联系
      */
     @SerializedName("2")
-    QRCODE;
+    QRCODE
 
   }
 

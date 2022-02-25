@@ -1,9 +1,5 @@
 package me.chanjar.weixin.cp.bean.message;
 
-import java.io.Serializable;
-import java.util.List;
-import java.util.Map;
-
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamConverter;
 import com.thoughtworks.xstream.converters.basic.IntConverter;
@@ -14,6 +10,10 @@ import me.chanjar.weixin.common.util.xml.IntegerArrayConverter;
 import me.chanjar.weixin.common.util.xml.StringArrayConverter;
 import me.chanjar.weixin.common.util.xml.XStreamCDataConverter;
 import me.chanjar.weixin.cp.util.xml.XStreamTransformer;
+
+import java.io.Serializable;
+import java.util.List;
+import java.util.Map;
 
 /**
  * 回调推送的message
@@ -188,6 +188,39 @@ public class WxCpTpXmlMessage implements Serializable {
   @XStreamAlias("ExternalUserID")
   @XStreamConverter(value = XStreamCDataConverter.class)
   protected String externalUserID;
+
+  @XStreamAlias("State")
+  @XStreamConverter(value = XStreamCDataConverter.class)
+  protected String state;
+
+  @XStreamAlias("Source")
+  @XStreamConverter(value = XStreamCDataConverter.class)
+  protected String source;
+
+  @XStreamAlias("FailReason")
+  @XStreamConverter(value = XStreamCDataConverter.class)
+  protected String failReason;
+
+  @XStreamAlias("ChatId")
+  @XStreamConverter(value = XStreamCDataConverter.class)
+  protected String chatId;
+
+  @XStreamAlias("UpdateDetail")
+  @XStreamConverter(value = XStreamCDataConverter.class)
+  protected String updateDetail;
+
+  @XStreamAlias("JoinScene")
+  protected Integer joinScene;
+
+  @XStreamAlias("QuitScene")
+  protected Integer quitScene;
+
+  @XStreamAlias("MemChangeCnt")
+  protected Integer memChangeCnt;
+
+  @XStreamAlias("TagType")
+  @XStreamConverter(value = XStreamCDataConverter.class)
+  protected String tagType;
 
   @XStreamAlias("WelcomeCode")
   @XStreamConverter(value = XStreamCDataConverter.class)
@@ -416,7 +449,7 @@ public class WxCpTpXmlMessage implements Serializable {
       @XStreamAlias("ItemUserId")
       protected Integer itemUserId;
       @XStreamAlias("ItemImage")
-      protected String  itemImage;
+      protected String itemImage;
     }
   }
 

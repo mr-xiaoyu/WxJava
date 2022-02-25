@@ -54,8 +54,10 @@ public class XStreamTransformer {
     map.put(WxCpXmlOutVideoMessage.class, configWxCpXmlOutVideoMessage());
     map.put(WxCpXmlOutVoiceMessage.class, configWxCpXmlOutVoiceMessage());
     map.put(WxCpXmlOutTaskCardMessage.class, configWxCpXmlOutTaskCardMessage());
+    map.put(WxCpXmlOutUpdateBtnMessage.class, configWxCpXmlOutUpdateBtnMessage());
     map.put(WxCpTpXmlPackage.class, configWxCpTpXmlPackage());
     map.put(WxCpTpXmlMessage.class, configWxCpTpXmlMessage());
+    map.put(WxCpXmlOutEventMessage.class, configWxCpXmlOutEventMessage());
     return map;
   }
 
@@ -119,6 +121,12 @@ public class XStreamTransformer {
     xstream.processAnnotations(WxCpXmlOutTaskCardMessage.class);
     return xstream;
   }
+  private static XStream configWxCpXmlOutUpdateBtnMessage() {
+    XStream xstream = XStreamInitializer.getInstance();
+    xstream.processAnnotations(WxCpXmlOutMessage.class);
+    xstream.processAnnotations(WxCpXmlOutUpdateBtnMessage.class);
+    return xstream;
+  }
 
   private static XStream configWxCpTpXmlPackage() {
     XStream xstream = XStreamInitializer.getInstance();
@@ -131,6 +139,13 @@ public class XStreamTransformer {
     XStream xstream = XStreamInitializer.getInstance();
     xstream.processAnnotations(WxCpTpXmlMessage.class);
 
+    return xstream;
+  }
+
+  private static XStream configWxCpXmlOutEventMessage() {
+    XStream xstream = XStreamInitializer.getInstance();
+    xstream.processAnnotations(WxCpXmlOutMessage.class);
+    xstream.processAnnotations(WxCpXmlOutEventMessage.class);
     return xstream;
   }
 
